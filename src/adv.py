@@ -1,4 +1,5 @@
 from room import Room
+from player import Player
 
 # Declare all the rooms
 
@@ -38,6 +39,9 @@ room['treasure'].s_to = room['narrow']
 #
 
 # Make a new player object that is currently in the 'outside' room.
+name = "larry"
+new_player = Player(name, room["outside"])
+# print(new_player.room)
 
 # Write a loop that:
 #
@@ -49,3 +53,47 @@ room['treasure'].s_to = room['narrow']
 # Print an error message if the movement isn't allowed.
 #
 # If the user enters "q", quit the game.
+import textwrap
+print(f"welcome! {new_player.name}")
+go = ""
+while go != "q":
+  current_room = new_player.room
+  directions = current_room.directions()
+  print("press i for instructions")
+  print(f"you are at: {new_player.room}")
+  print(f"possible travel directions: {directions} ")
+  print(textwrap.fill(current_room.description, width=40))
+  go = input("what will you do?  ")
+  if(go == "n"):
+    if current_room.n_to:
+      new_player.room = current_room.n_to
+      print("")
+    else:
+      print("\n can't go that direction")
+  elif(go == "s"):
+    if current_room.s_to:
+      new_player.room = current_room.s_to
+      print("")
+    else:
+      print("\n can't go that direction")
+  elif(go == "e"):
+    if current_room.e_to:
+      new_player.room = current_room.e_to
+      print("")
+    else:
+      print("\n can't go that direction")
+  elif(go == "w"):
+    if current_room.w_to:
+      new_player.room = current_room.w_to
+      print("")
+    else:
+      print("\n can't go that direction!")
+  elif(go =="q"):
+    print("Goodbye!")
+  elif(go == "i"):
+    print("\n instructions: press... \n n to go north \n s to go south \n e to go east \n w to go west \n q to quite the game")
+  else:
+    print("\n invalid input try again")
+
+
+  
